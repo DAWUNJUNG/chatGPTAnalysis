@@ -1,0 +1,10 @@
+setwd("/Users/lacy/tukorea/chatGPTAnalysis")
+lang_data <- read.csv("tmp/language_analysis.csv", sep = ",", header = TRUE, encoding = "UTF-8")
+png(filename = "static/img/language_analysis.png", width = 300, height = 600, unit = "px", bg = "transparent")
+barplot(lang_data$count, names = lang_data$language)
+dev.off()
+
+result_data <- read.csv("tmp/result_analysis.csv", sep = ",", header = TRUE, encoding = "UTF-8")
+png(filename = "static/img/result_analysis.png", width = 300, height = 600, unit = "px", bg = "transparent")
+pie(result_data$count, labels = result_data$result)
+dev.off()

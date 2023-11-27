@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>R 언어 그래프</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <style>
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container px-2 py-5">
+    <h2 class="pb-2 border-bottom">R 언어 그래프</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-5 py-5">
+        <div class="col d-flex flex-column align-items-start gap-2">
+            <h2 class="fw-bold text-body-emphasis">소스코드 검증 R 그래프</h2>
+            <p class="text-body-secondary">
+                OPENAI 소스코드를 검증하고 결과 데이터에 대한 내용을 그래프로 보여주는 페이지 입니다.
+            </p>
+            <div style="display: inline-flex;">
+                <input type="date" class="form-control" id="startDate">
+                <span> ~ </span>
+                <input type="date" class="form-control" id="endDate">
+            </div>
+            <div style="display: inline-block;">
+                <button id="analysisGraphGet" class="btn btn-primary btn-lg">조회</button>
+            </div>
+        </div>
+        <div id="graphContainer" class="col" style="display: none;">
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="col d-flex flex-column gap-2">
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">언어별 요청 수</h4>
+                  <img class="bi" src="{{ url_for('static', filename='img/language_analysis.png') }}">
+                </div>
+                <div class="col d-flex flex-column gap-2">
+                    <h4 class="fw-semibold mb-0 text-body-emphasis">소스코드 검증 성공/실패</h4>
+                    <img class="bi" src="{{ url_for('static', filename='img/result_analysis.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</html>
