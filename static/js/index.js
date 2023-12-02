@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#gptRequest').on('click', function () {
         const btnText = $(this).text();
         if (btnText === 'GPT에게 소스코드 물어보기') {
+            $('#goGraphPage').hide();
             $('#gptRequestContent').show();
             $('#reloadPageBtn').show();
             $(this).text('GPT에게 질문하기');
@@ -26,6 +27,10 @@ $(document).ready(function () {
 
     $('#reloadPageBtn').on('click', function () {
         location.reload();
+    });
+
+    $('#goGraphPage').on('click', function () {
+       location.href = '/graph';
     });
 
     function gptRequest() {
