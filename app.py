@@ -5,7 +5,6 @@ import subprocess
 from dotenv import load_dotenv
 import os
 import pymysql
-from rpy2.robjects import r
 import pandas as pd
 
 load_dotenv(verbose=True)
@@ -124,7 +123,7 @@ def rGraphGenerate():
 
 
 def getDate(startDate, endDate):
-    db = pymysql.connect(host='127.0.0.1', port=13306, user='root', password='root', db='gptchecker')
+    db = pymysql.connect(host=os.getenv('MYSQL_HOST'), port=int(os.getenv('MYSQL_PORT')), user=os.getenv('MYSQL_ID'), password=os.getenv('MYSQL_PW'), db=os.getenv('MYSQL_DB'))
     query = f"SELECT language, count(language) as count FROM check_result WHERE createdAt BETWEEN '{startDate} 00:00:00' AND '{endDate} 23:59:59' GROUP BY language"
     df = pd.read_sql_query(query, db)
     df.to_csv('tmp/language_analysis.csv', index=False)
@@ -135,7 +134,7 @@ def getDate(startDate, endDate):
 
 
 def dbInsert(language):
-    db = pymysql.connect(host='127.0.0.1', port=13306, user='root', password='root', db='gptchecker')
+    db = pymysql.connect(host=os.getenv('MYSQL_HOST'), port=int(os.getenv('MYSQL_PORT')), user=os.getenv('MYSQL_ID'), password=os.getenv('MYSQL_PW'), db=os.getenv('MYSQL_DB'))
 
     cursor = db.cursor()
     sql = "insert into check_result (language) values (%s);"
@@ -150,7 +149,7 @@ def dbInsert(language):
 
 
 def dbUpdate(id, result):
-    db = pymysql.connect(host='127.0.0.1', port=13306, user='root', password='root', db='gptchecker')
+    db = pymysql.connect(host=os.getenv('MYSQL_HOST'), port=int(os.getenv('MYSQL_PORT')), user=os.getenv('MYSQL_ID'), password=os.getenv('MYSQL_PW'), db=os.getenv('MYSQL_DB'))
 
     cursor = db.cursor()
     sql = "update check_result set result = %s where id = %s"
